@@ -50,6 +50,9 @@ def handle_message(event):
     else:
         reply_text = push_text
 
+    if push_text == "好き":
+        reply_text = "俺も"
+
     #リプライ部分の記述
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
