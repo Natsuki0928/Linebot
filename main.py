@@ -1,17 +1,12 @@
-from flask import Flask, request, abort
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
+from flask import Flask,request,abort
+from linebot import LineBotApi,WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import os
+import requests
+import pprint
 
-app = Flask(__name__)
+app=Flask(__name__)
 
 # 環境変数
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
