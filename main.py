@@ -5,6 +5,7 @@ from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import os
 import requests
 import pprint
+import random
 
 app = Flask(__name__)
 
@@ -55,6 +56,14 @@ def handle_message(event):
 
     if judge == True:
         reply_text = "俺も"+push_text
+
+    #おみくじリスト
+    paper = ["大吉","中吉","小吉","吉","末吉","凶"]
+
+    result = random.choice(paper)
+
+    if push_text == "おみくじ":
+        reply_text = "今日の運勢は"+result+"だよ！"
 
 
     #リプライ部分の記述
