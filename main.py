@@ -6,7 +6,7 @@ import os
 import requests
 import pprint
 
-app=Flask(__name__)
+app = Flask(__name__)
 
 # 環境変数
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -50,9 +50,12 @@ def handle_message(event):
     else:
         reply_text = push_text
 
-    if push_text in "好き":
+    judge = "好き" in push_text
+
+
+    if judge == True:
         reply_text = "俺も"+push_text
-        
+
 
     #リプライ部分の記述
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
