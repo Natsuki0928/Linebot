@@ -52,19 +52,28 @@ def handle_message(event):
         reply_text = push_text
 
     judge = "好き" in push_text
+    judge_2 = "かわいい" in push_text
 
 
     if judge == True:
         reply_text = "俺も"+push_text
 
+    if judge_2 == True:
+        reply_text = "照れる..." 
+
+
     #おみくじリスト
-    paper = ["大吉","中吉","小吉","吉","末吉","凶"]
+    paper = ["大吉", "中吉", "小吉", "吉", "末吉", "凶"]
+    paper_d = {"大吉": "世界は君の思い通りだ！٩( 'ω' )و",
+               "中吉": "バッチリじゃん",
+               "小吉": "まあまあじゃん(^^)",
+               "吉": "ビミョーだね( ´Д`)y━･~~",
+               "末吉": "頑張ろうか...",
+               "凶": "今日は外でない方がいいよ(´･ω･`)"}
 
     result = random.choice(paper)
-
     if push_text == "おみくじ":
-        reply_text = "今日の運勢は"+result+"だよ！"
-
+        reply_text = "今日の運勢は" + result + "だよ！" + paper_d[result]
 
     #リプライ部分の記述
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
