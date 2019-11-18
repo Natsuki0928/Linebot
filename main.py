@@ -58,8 +58,7 @@ def handle_message(event):
     if judge == True:
         reply_text = "俺も"+push_text
 
-    if judge_2 == True:
-        reply_text = "照れる..." 
+
 
 
     #おみくじリスト
