@@ -95,15 +95,15 @@ def handle_message(event):
             ]
         )
 
-    @handler.add(MessageEvent, message=LocationMessage)
-    def handle_location(event):
-        push_text = event.message.address
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location(event):
+    push_text = event.message.address
 
-        result = sc.get_weather_from_location(push_text)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(push_text=result)
-        )
+    result = sc.get_weather_from_location(push_text)
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(push_text=result)
+    )
 
 
 if __name__=="__main__":
