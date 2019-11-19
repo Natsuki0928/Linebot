@@ -87,13 +87,13 @@ def handle_message(event):
 
     # 位置情報に基づいた天気情報の入力
     if '位置情報' in push_text:
-    line_bot_api.reply_message(
-      event.reply_token,
-      [
-      TextSendMessage(push_text='あなたの位置情報を教えてください。'),
-      TextSendMessage(push_text='line://nv/location')
-      ]
-    )
+        line_bot_api.reply_message(
+            event.reply_token,
+            [
+            TextSendMessage(push_text='あなたの位置情報を教えてください。'),
+            TextSendMessage(push_text='line://nv/location')
+            ]
+        )
 
     @handler.add(MessageEvent, message=LocationMessage)
     def handle_location(event):
