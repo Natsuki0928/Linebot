@@ -2,6 +2,11 @@ from flask import Flask,request,abort
 from linebot import LineBotApi,WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
+
+from linebot.exceptions import LineBotApiError
+import scrape as sc
+import urllib3.request
+
 import os
 import requests
 import pprint
@@ -40,6 +45,7 @@ def handle_message(event):
     push_text = event.message.text
 
     #リプライする文字列
+    #天気という文字列に対して天気情報を返す
     if push_text == "天気":
         url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'
         api_data = requests.get(url).json()
@@ -78,6 +84,27 @@ def handle_message(event):
 
     #リプライ部分の記述
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
+
+    # 位置情報に基づいた天気情報の入力
+    if '位置情報' in push_text:
+    line_bot_api.reply_message(
+      event.reply_token,
+      [
+      TextSendMessage(push_text='あなたの位置情報を教えてください。'),
+      TextSendMessage(push_text='line://nv/location')
+      ]
+    )
+
+    @handler.add(MessageEvent, message=LocationMessage)
+    def handle_location(event):
+        push_text = event.message.address
+
+        result = sc.get_weather_from_location(push_text)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(push_text=result)
+        )
+
 
 if __name__=="__main__":
     port=int(os.getenv("PORT",5000))
