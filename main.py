@@ -59,15 +59,15 @@ def handle_message(event):
 
     judge = "好き" in push_text
     judge_2 = "かわいい" in push_text
-    judge_3 = "すご" or "便利"　in push_text
+    #judge_3 = "すご" or "便利"　in push_text
 
 
     if judge == True:
         reply_text = "俺も"+push_text
     if judge_2 == True:
         reply_text = "照れる//"
-    if judge_3 == True:
-        reply_text = "でしょ"
+    #if judge_3 == True:
+        #reply_text = "でしょ"
 
 
 
