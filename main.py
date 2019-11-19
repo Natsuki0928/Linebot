@@ -82,8 +82,6 @@ def handle_message(event):
     if push_text == "おみくじ":
         reply_text = "今日の運勢は" + result + "だよ！" + paper_d[result]
 
-    #リプライ部分の記述
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
     # 位置情報に基づいた天気情報の入力
     if '位置情報' in push_text:
@@ -94,6 +92,8 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
+    #リプライ部分の記述
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
