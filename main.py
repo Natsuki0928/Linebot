@@ -90,8 +90,8 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             [
-            TextSendMessage(push_text='あなたの位置情報を教えてください。'),
-            TextSendMessage(push_text='line://nv/location')
+            TextSendMessage(text='あなたの位置情報を教えてください。'),
+            TextSendMessage(text='line://nv/location')
             ]
         )
 
@@ -102,7 +102,7 @@ def handle_location(event):
     result = sc.get_weather_from_location(push_text)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(push_text=result)
+        TextSendMessage(text=result)
     )
 
 
